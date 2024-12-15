@@ -1,1 +1,2 @@
 This is file1.txt
+"Bugfix: Corrected the issue in file1.txt."
