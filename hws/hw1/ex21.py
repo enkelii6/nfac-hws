@@ -1,10 +1,8 @@
-# Exercise 21: exponentiation
-#
-# Declare a palindrome string (A palindrome is a word that is spelled the same forward and backward. ex: "racecar")
-# Check if it is palindromic without using loops
+def not_exponentiation(s):
+    return s == s[::-1]
 
-def solution(word):
-    return word == word[::-1]
+a = "argentinamanitnegra"
+b = "not a palindrome"
 
-
-print(solution('car'))
+print(not_exponentiation(a))
+print(not_exponentiation(b))
