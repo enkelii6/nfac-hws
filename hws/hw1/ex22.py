@@ -1,22 +1,28 @@
-# 💎 Exercise 22: check-anagrams
-#
-# Declare 2 strings
-# Check if the strings are anagrams (ignoring case)
-# Print the result
-#
-# *Anagram - a word, phrase, or name formed by rearranging the letters of another, such as spar, formed from rasp.
+def check_anagrams(s, t):
+    cnt = [0] * 26 #assuming that strings contain only english letters
+    for i in s:
+        cnt[ord(i.lower()) - ord('a')] += 1
+    for i in t:
+        cnt[ord(i.lower()) - ord('a')] -= 1
 
-def solution(word1, word2):
-    if len(word1) != len(word2):
-        return False
+    return cnt.count(0) == 26
 
-    for letter in word1:
-        if letter not in word2:
-            return False
+a = "spar"
+b = "rasp"
 
-        word1 = word1.replace(letter, '', 1)
-        word2 = word2.replace(letter, '', 1)
+print(check_anagrams(a, b))
 
-    return True
+a = "abacaba"
+b = "aaabbc"
 
-print(solution('lfywlaqpgotebagxokgwflwnhijvmhbsarrqxohpswofzbtyjfxszfbtsmytouybtyuuiydjduqnbngntxoftfjstfgcrcomuzql', 'lfywlaqpgotebagxokgwflwnhijvmhbsarrqxohpswofzbtyjfxszfbtsmytouybtyuuiydjduqnbngntxoftfjstfgcrcomuzqq'))
+print(check_anagrams(a, b))
+
+a = "RASPberry"
+b = "beRRyspar"
+
+print(check_anagrams(a, b))
+
+a = "Bababooey"
+b = "bobobaaet"
+
+print(check_anagrams(a, b))
