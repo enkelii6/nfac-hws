@@ -1,4 +1,1 @@
-def solution(base, exponent):
-    return base ** exponent
-
-print(solution(2, 3))
+words = map(str(input()))
