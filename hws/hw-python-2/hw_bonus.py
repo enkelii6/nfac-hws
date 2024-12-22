@@ -30,9 +30,16 @@ Example:
 find_smallest_divisor(21) -> 3
 find_smallest_divisor(49) -> 7
 """
-
+import math
 def find_smallest_divisor(n: int) -> int:
-    # write your code here
+    if n % 2 == 0:
+        return 2
+
+    limit = int(math.sqrt(n)) + 1
+    for i in range(3, limit, 2):
+        if n % i == 0:
+            return i
+    return n
     pass
 
 
@@ -49,7 +56,13 @@ check_divisible_by_any(23, "2 3 5") -> False
 """
 
 def check_divisible_by_any(n: int, divisors: str) -> bool:
-    # write your code here
+    if n % 2 == 0:
+        return 2
+    limit = int(math.sqrt(n)) + 1
+    for i in range(3, limit, 2):
+        if n % i == 0:
+            return i
+    return n
     pass
 
 
