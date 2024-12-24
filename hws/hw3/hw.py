@@ -234,5 +234,5 @@ find_difference([1, 2, 3, 4], [3, 4, 5, 6]) -> [1, 2]
 """
 
 def find_difference(list1: list, list2: list) -> list:
-    result = list(set(list1) - set(list2))
-    return result
+    res = list(set(list1) - set(list2))
+    return res
