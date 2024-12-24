@@ -8,12 +8,12 @@ is_prime(10) -> False
 
 """
 
-def is_prime(n: int) -> bool:
-    if n < 2:
+def is_prime(number: int) -> bool:
+    if number < 2:
         return False
 
-    for i in range(2, n):
-        if n % i == 0:
+    for divider in range(2, number):
+        if number % divider == 0:
             return False
 
     return True
@@ -29,8 +29,13 @@ nth_fibonacci(9) -> 21
 """
 
 def nth_fibonacci(n: int) -> int:
-    # write your code here
-    pass
+    if n == 1:
+        return 0
+
+    if n == 2 or n == 3:
+        return 1
+
+    return nth_fibonacci(n - 1) + nth_fibonacci(n - 2)
 
 """
 Exercise-3: factorial
@@ -175,8 +180,14 @@ sum_of_multiples(20, 7, 11) -> 168
 """
 
 def sum_of_multiples(n: int, x: int, y: int) -> int:
-    # write your code here
-    pass
+    summ = 0
+    for i in range(1, n + 1):
+        if not i % x:
+            summ += i
+        elif not i % y:
+            summ += i
+
+    return summ
 
 
 """
@@ -251,10 +262,25 @@ is_power_of_two(8) -> True
 is_power_of_two(10) -> False
 """
 
-def is_power_of_two(n: int) -> bool:
-    # write your code here
-    pass
+def is_power_of_two_recur(n: int) -> bool:
+    if n == 1:
+        return True
 
+    elif not n % 2:
+        return is_power_of_two_recur(n // 2)
+
+    return False
+
+
+def is_power_of_two(n: int) -> bool:
+    while n >= 1:
+        if n == 1:
+            return True
+
+        if not n % 2:
+            n //= 2
+        else:
+            return False
 
 """
 Exercise-18: sum_of_cubes
@@ -267,8 +293,11 @@ sum_of_cubes(4) -> 100
 """
 
 def sum_of_cubes(n: int) -> int:
-    # write your code here
-    pass
+    sum = 1
+    for i in range(2, n + 1):
+        sum += i ** 3
+
+    return sum
 
 
 """
@@ -296,6 +325,26 @@ is_armstrong_number(153) -> True
 is_armstrong_number(370) -> True
 """
 
+def is_armstrong_number_int(n: int) -> bool:
+    primary_n = n
+    summ = 0
+    length_of_num = len(str(n))
+
+    for i in range(length_of_num):
+        last_digit = n % 10
+
+        summ += last_digit ** length_of_num
+
+        n //= 10
+
+    return summ == primary_n
+
+
 def is_armstrong_number(n: int) -> bool:
-    # write your code here
-    pass
+    str_n = str(n)
+    summ = 0
+
+    for num in str_n:
+        summ += int(num) ** len(str_n)
+
+    return summ == n
