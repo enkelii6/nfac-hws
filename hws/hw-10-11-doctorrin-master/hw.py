@@ -7,9 +7,16 @@ def multiply(a, b):
     return a * b
 operation(multiply, 5, 3) -> 15
 """
+from math import factorial
+
+from hws.hw1.hw import numbers
+from hws.hw8.hw import remove_duplicates
+
 
 def operation(func, x: int, y: int) -> int:
-    pass
+    return func(x, y)
+
+
 
 """
 Exercise-2: Implement Map Function
@@ -20,7 +27,11 @@ my_map(lambda x: x**2, [1, 2, 3, 4]) -> [1, 4, 9, 16]
 """
 
 def my_map(func, my_list: list) -> list:
-    pass
+    result = []
+    for i in my_list:
+        result.append(func(i))
+    return result
+
 
 """
 Exercise-3: Lambda Function with Filter
@@ -31,7 +42,8 @@ filter_even_numbers([1, 2, 3, 4, 5, 6, 7, 8]) -> [1, 3, 5, 7]
 """
 
 def filter_even_numbers(numbers: list) -> list:
-    pass
+    return list(filter(lambda x: x % 2 != 0, numbers))
+
 
 """
 Exercise-4: Recursive Factorial
@@ -42,7 +54,9 @@ recursive_factorial(5) -> 120
 """
 
 def recursive_factorial(n: int) -> int:
-    pass
+    if n == 1:
+        return 1
+    return n * factorial(n-1)
 
 """
 Exercise-5: Decorator for Timing
@@ -71,7 +85,12 @@ new_func(3) -> 36
 """
 
 def compose(*funcs):
-    pass
+    def composed_func(x):
+        result = x
+        for func in funcs:
+            result = func(result)
+        return result
+    return composed_func
 
 """
 Exercise-7: Partial Application
@@ -85,7 +104,9 @@ add_five_and_six(7) -> 18
 """
 
 def partial(func, *args):
-    pass
+    def wrapper(*new_args):
+        return func(*args, *new_args)
+    return wrapper
 
 """
 Exercise-8: Reduce to Compute Factorial
@@ -96,7 +117,7 @@ factorial_reduce(5) -> 120
 """
 
 def factorial_reduce(n: int) -> int:
-    pass
+    return reduce(lambda x, y: x * y, range(1, n + 1))
 
 """
 Exercise-9: Function Memoization
@@ -111,7 +132,17 @@ memoized_function(5)  # -> This will return the cached result
 """
 
 def memoize(func):
-    pass
+    cache = {}
+
+    def wrapper(*args):
+        if args in cache:
+            return cache[args]
+
+        result = func(*args)
+        cache[args] = result
+        return result
+
+    return wrapper
 
 """
 Exercise-10: Custom Reduce Function
@@ -122,7 +153,15 @@ my_reduce(lambda x, y: x*y, [1, 2, 3, 4]) -> 24
 """
 
 def my_reduce(func, iterable, initializer=None):
-    pass
+    if initializer is None:
+        initializer = iterable[0]
+        iterable = iterable[1:]
+
+    for item in iterable:
+        initializer = func(initializer, item)
+
+    return initializer
+
 
 """
 Exercise-11: Lambda Function Sort
@@ -133,7 +172,9 @@ sort_by_last_letter(['apple', 'banana', 'cherry', 'date']) -> ['banana', 'apple'
 """
 
 def sort_by_last_letter(words: list) -> list:
-    pass
+    words.sort(key=lambda x: x[-1])
+    return words
+
 
 """
 Exercise-12: Recursive List Reversal
@@ -144,7 +185,11 @@ recursive_reverse([1, 2, 3, 4, 5]) -> [5, 4, 3, 2, 1]
 """
 
 def recursive_reverse(my_list: list) -> list:
-    pass
+    if len(my_list) <= 1:
+        return my_list
+
+    return recursive_reverse(my_list[1:]) + [my_list[0]]
+
 
 """
 Exercise-13: Decorator for Function Counting
@@ -161,7 +206,14 @@ test_function()
 """
 
 def count_calls(func):
-    pass
+    counter = 0
+
+    def wrapper(*args, **kwargs):
+        nonlocal counter
+        counter += 1
+        return func(*args, **kwargs)
+
+    return wrapper
 
 """
 Exercise-14: Use reduce to Find the Maximum Number
@@ -171,8 +223,10 @@ Example:
 find_max([1, 2, 3, 4, 5]) -> 5
 """
 
+from functools import reduce
+
 def find_max(numbers: list) -> int:
-    pass
+    return reduce(lambda a, b: a if a > b else b, numbers)
 
 """
 Exercise-15: Use filter and lambda to Remove Elements
@@ -183,7 +237,7 @@ remove_elements([1, 2, 3, 2, 4, 2, 5], 2) -> [1, 3, 4, 5]
 """
 
 def remove_elements(my_list: list, element):
-    pass
+    return list(filter(lambda x: x != element, my_list))
 
 """
 Exercise-16: Higher-Order Function for Repeats
@@ -206,7 +260,9 @@ recursive_sum([1, 2, 3, 4, 5]) -> 15
 """
 
 def recursive_sum(my_list: list) -> int:
-    pass
+    if len(my_list) == 1:
+        return my_list[0]
+    return my_list[0] + sum(my_list[1:])
 
 """
 Exercise-18: Map with Multiple Lists
@@ -217,4 +273,4 @@ add_two_lists([1, 2, 3], [4, 5, 6]) -> [5, 7, 9]
 """
 
 def add_two_lists(list1: list, list2: list) -> list:
-    pass
+    return list(map(lambda a, b: a + b, list1, list2))
