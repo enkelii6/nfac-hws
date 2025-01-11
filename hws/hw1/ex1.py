@@ -6,3 +6,4 @@
 def two_sum(a, b):
     print(a + b)
 
+two_sum(1, 4)
