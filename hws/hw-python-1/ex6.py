@@ -1,5 +1,3 @@
-#ex6
-
 def swap(string):
     start = string [0]
     end = string [-1]

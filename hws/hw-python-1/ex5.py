@@ -1,6 +1,3 @@
-#ex5
-
-
 def is_vowel(character):
     if character in 'euioa':
         print("character is vowel")

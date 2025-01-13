@@ -1,5 +1,3 @@
-#ex15
-
 def quot_and_rem (num1, num2):
     quot = num1//num2
     rem = num1 % num2

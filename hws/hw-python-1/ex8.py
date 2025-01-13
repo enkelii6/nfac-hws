@@ -1,5 +1,3 @@
-#ex8
-
 def rectangle_area (lenght,width):
     return lenght*width
 

@@ -1,5 +1,3 @@
-#ex17
-
 def char_count(string, char):
     print(string.count(char))
 
