@@ -1,3 +1,4 @@
+import math
 """
 💎 Exercise-1: count_substrings
 Write a function "count_substrings(s: str, subs: str) -> int" that takes 
@@ -30,7 +31,7 @@ Example:
 find_smallest_divisor(21) -> 3
 find_smallest_divisor(49) -> 7
 """
-import math
+
 def find_smallest_divisor(n: int) -> int:
     if n % 2 == 0:
         return 2
