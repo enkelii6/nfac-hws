@@ -17,7 +17,6 @@ def is_prime(n: int) -> bool:
             return False
     return True
 
-    pass
 
 """
 Exercise-2: nth_fibonacci
@@ -41,8 +40,6 @@ def nth_fibonacci(n: int) -> int:
     return b
 
 
-    pass
-
 """
 Exercise-3: factorial
 Write a function "factorial(n: int) -> int" that takes an integer 'n' and returns the factorial of 'n'.
@@ -56,7 +53,7 @@ def factorial(n: int) -> int:
     if n==0 or n==1:
         return 1
     return n*factorial(n-1)
-    pass
+
 
 """
 Exercise-4: count_vowels
@@ -69,13 +66,13 @@ count_vowels("world") -> 1
 """
 
 def count_vowels(s: str) -> int:
-    vowels ="euioaEUIOA"
+    vowels ="euioa"
     count = 0
     for letters in s:
-        if letters in vowels:
+        if letters.lower() in vowels:
             count +=1
     return count
-    pass
+
 
 """
 Exercise-5: sum_of_digits
@@ -89,7 +86,6 @@ sum_of_digits(98765) -> 35
 
 def sum_of_digits(n: int) -> int:
     return sum(int(digit) for digit in str(abs(n)))
-    pass
 
 
 """
@@ -103,7 +99,6 @@ reverse_string("world") -> "dlrow"
 
 def reverse_string(s: str) -> str:
     return s[::-1]
-    pass
 
 
 """
@@ -121,8 +116,6 @@ def sum_of_squares(n: int) -> int:
     for i in range (1,n+1):
         sum +=i**2
     return sum
-
-    pass
 
 
 """
@@ -145,8 +138,6 @@ def collatz_sequence_length(n: int) -> int:
         length+=1
     return length
 
-    pass
-
 
 """
 Exercise-9: is_leap_year
@@ -163,7 +154,6 @@ def is_leap_year(year: int) -> bool:
         return True
     else:
         return False
-    pass
 
 
 """
@@ -179,7 +169,6 @@ count_words("This is a test") -> 4
 def count_words(s: str) -> int:
     words = s.split()
     return len(words)
-    pass
 
 
 """
@@ -195,7 +184,7 @@ is_palindrome("hello") -> False
 
 def is_palindrome(s: str) -> bool:
     return s == s[::-1]
-    pass
+
 
 """
 Exercise-12: sum_of_multiples
@@ -215,8 +204,6 @@ def sum_of_multiples(n: int, x: int, y: int) -> int:
             sum += i
     return  sum
 
-    pass
-
 
 """
 Exercise-13: gcd
@@ -230,7 +217,6 @@ gcd(27, 15) -> 3
 import math
 def gcd(a: int, b: int) -> int:
     return math.gcd(a,b)
-    pass
 
 
 """
@@ -247,7 +233,6 @@ def lcm(a: int, b: int) -> int:
     if a == 0 or b == 0:
         return 0
     return abs(a * b) // math.gcd(a,b)
-    pass
 
 
 """
@@ -258,13 +243,10 @@ takes a string 's' and a character 'c', and returns the number of occurrences of
 Example:
 count_characters("hello world", "l") -> 3
 count_characters("apple", "p") -> 2
-
-
 """
 
 def count_characters(s: str, c: str) -> int:
     return s.count(c)
-    pass
 
 
 """
@@ -279,7 +261,6 @@ digit_count(4567) -> 4
 
 def digit_count(n: int) -> int:
     return len(str(abs(n)))
-    pass
 
 
 """
@@ -298,7 +279,6 @@ def is_power_of_two(n: int) -> bool:
     while n % 2 == 0:
             n = n // 2
     return  n == 1
-    pass
 
 
 """
@@ -316,7 +296,6 @@ def sum_of_cubes(n: int) -> int:
     for i in range (1,n+1):
         sum +=i**3
     return sum
-    pass
 
 
 """
@@ -334,7 +313,6 @@ def is_perfect_square(n: int) -> bool:
         return False
     sqrt_n=math.sqrt(n)
     return sqrt_n**2==n
-    pass
 
 
 """
@@ -352,4 +330,3 @@ def is_armstrong_number(n: int) -> bool:
     num_digits = len(digits)
     sum_of_powers = sum(int(digit) ** num_digits for digit in digits)
     return sum_of_powers == n
-    pass
