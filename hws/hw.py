@@ -86,7 +86,7 @@ unique_words('hello world hello') -> 2
 def unique_words(my_string: str) -> int:
     words = my_string.split()
     unique_words_set = set (words)
-    return len (unique_words_set)
+    return len(unique_words_set)
 
 
 """
@@ -224,4 +224,3 @@ def least_frequent(my_list: list) -> int:
     count = Counter(my_list)
     least_freq_el = min(count, key=lambda x: (count[x], my_list.index(x)))
     return least_freq_el
-
