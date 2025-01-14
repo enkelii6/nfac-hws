@@ -1,8 +1,17 @@
 from aiohttp import web
 
+books = [
+    {
+        'id': '1',
+        'title': '1984',
+        'description': 'Book that changed the world',
+        'rating': '4.99',
+    },
+]
+
 
 async def handle(request):
-    return web.Response(text='Hello World')
+    return web.json_response({'hello': 'world'})
 
 
 app = web.Application()

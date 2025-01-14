@@ -4,10 +4,10 @@ import aiohttp
 
 
 async def get_google():
-    session = aiohttp.ClientSession()
-    response = await session.get('https://google.com')
-    print(await response.text())
-    await session.close()
+    async with aiohttp.ClientSession() as session:
+        async with session.get('http://0.0.0.0:8080') as response:
+            response_json = await response.json()
+            print(response_json['hello'])
 
 
 asyncio.run(get_google())
