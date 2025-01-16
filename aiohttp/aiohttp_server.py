@@ -1,5 +1,7 @@
 from aiohttp import web
 
+from aiohttp.pagination import page_size
+
 movies = [
     { 'id': '1', 'title': 'The Shawshank Redemption', 'year': 1994, 'genre': 'Drama', 'rating': '4.95', },
     { 'id': '2', 'title': 'The Godfather', 'year': 1972, 'genre': 'Crime, Drama', 'rating': '4.88', },
@@ -19,7 +21,13 @@ async def handle(request):
 
 async def popular(request):
     sorted_movies = sorted(movies, key=lambda x: x['rating'], reverse=True)
-    return web.json_response({'movies': sorted_movies})
+    return web.json_response(paginate(movies, page_size, page_number))
+
+def paginate(items, page_size, page_number):
+    start_index = (page_number - 1) * page_size
+    end_index = start_index + page_size
+    return items[start_index:end_index]
+
 
 app = web.Application()
 app.add_routes([web.get('/', handle), web.get('/popular',popular)])
