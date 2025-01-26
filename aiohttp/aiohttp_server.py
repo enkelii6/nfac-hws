@@ -1,6 +1,5 @@
 from aiohttp import web
 
-from aiohttp.pagination import page_size
 
 movies = [
     { 'id': '1', 'title': 'The Shawshank Redemption', 'year': 1994, 'genre': 'Drama', 'rating': '4.95', },
@@ -17,20 +16,39 @@ movies = [
 
 
 async def handle(request):
-    return web.json_response({'movies': movies})
+    movies_json = dict(request.rel_url.query)
+    res =filtered_movies(movies,**movies_json)
+    return web.json_response ({'movies':res, 'filters':movies_json})
 
 async def popular(request):
     sorted_movies = sorted(movies, key=lambda x: x['rating'], reverse=True)
-    return web.json_response(paginate(movies, page_size, page_number))
+    movies_json = dict(request.rel_url.query)
+    page = int(movies_json.pop('page',0))
+    limit = int(movies_json.pop('limit',10))
+    paginated_movies = paginate(sorted_movies, page, limit)
+    return web.json_response({'movies': paginated_movies, 'paginate': movies_json})
 
-def paginate(items, page_size, page_number):
-    start_index = (page_number - 1) * page_size
-    end_index = start_index + page_size
-    return items[start_index:end_index]
+def paginate(movies, page = 0, limit = 10):
+    start = limit * page
+    end = start + limit
+    return movies[start:end]
+
+def filtered_movies (movies,**filters):
+    filtered_movies = []
+    for movie in movies:
+        match = True
+        for key, value in filters.items():
+            if str(movie.get(key)) != value:
+                match = False
+                break
+        if match:
+            filtered_movies.append(movie)
+    return filtered_movies
+
 
 
 app = web.Application()
-app.add_routes([web.get('/', handle), web.get('/popular',popular)])
+app.add_routes([web.get('/', handle) , web.get('/popular',popular)])
 
 
 if __name__ == '__main__':
