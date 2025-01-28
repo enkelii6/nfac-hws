@@ -1,0 +1,5 @@
+class Singleton:
+    ...
+
+
+singleton = Singleton()
