@@ -1,26 +1,31 @@
-async def get(self, **kwargs) -> dict | None:
-    for row in self._get_all():
-        if self._compare_kwargs(row, **kwargs):
-            return row
+from .base_repository import BaseRepository
+import csv
 
-    return None
+class CSVRepository(BaseRepository):
+    def __init__(self, path: str):
+        self.path = path
 
+    def _read_csv(self):
+        with open(self.path, 'r') as file:
+            return list(csv.DictReader(file))
 
-async def create(self, **kwargs) -> dict: ...
-
-
-async def update(self, **kwargs) -> dict: ...
-
-
-async def delete(self, **kwargs) -> dict: ...
+    def get(self) -> [dict]:
+        return self._read_csv()
 
 
-async def filter(self, **kwargs) -> [dict]:
-    res = []
-    for row in self.data:
-        for key, value in kwargs.items():
-            if row.get(key) != value:
-                matches = False
-                break  # Exit the loop if any condition fails
-        if matches: res.append(row)
-    return res
+    async def create(self, **kwargs) -> dict: ...
+    async def update(self, **kwargs) -> dict: ...
+    async def delete(self, **kwargs) -> dict: ...
+
+    def filter(self, **kwargs) -> [dict]:
+        data_list = self._read_csv()
+        res = []
+        for row in data_list:
+            matches = True
+            for key, value in kwargs.items():
+                if row.get(key) != value:
+                    matches = False
+                    break
+            if matches:
+                res.append(row)
+        return res

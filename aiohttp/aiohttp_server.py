@@ -1,6 +1,8 @@
 from aiohttp import web
-movie_repository = JSONRepository('movies.json')
 from repositories.json_repository import JSONRepository
+from repositories.csv_repository import CSVRepository
+movie_repository = CSVRepository("aiohttp/movies.csv")
+
 
 
 movies = [
@@ -19,7 +21,7 @@ movies = [
 
 async def handle(request):
     movies_json = dict(request.rel_url.query)
-    res =await movie_repository.filter(**movies_json)
+    res = movie_repository.filter(**movies_json)
     return web.json_response ({'movies':res, 'filters':movies_json})
 
 async def popular(request):

@@ -1,8 +1,9 @@
-from base_repository import BaseRepository
-
+from .base_repository import BaseRepository
+import json
 class JSONRepository(BaseRepository):
     def __init__(self, path: str):
-        self.path = path
+        with open(path, 'r') as file:
+            self.data = json.load(file)
 
     async def get(self, **kwargs) -> dict | None:
         for item in self.data:
