@@ -25,17 +25,12 @@ async def handle(request):
     return web.json_response ({'movies':res, 'filters':movies_json})
 
 async def popular(request):
-    sorted_movies = sorted(movies, key=lambda x: x['rating'], reverse=True)
+    sorted_movies = await movie_repository.sort()
     movies_json = dict(request.rel_url.query)
     page = int(movies_json.pop('page',0))
     limit = int(movies_json.pop('limit',10))
-    paginated_movies = paginate(sorted_movies, page, limit)
+    paginated_movies = await movie_repository.paginate(sorted_movies, page, limit)
     return web.json_response({'movies': paginated_movies, 'paginate': movies_json})
-
-def paginate(movies, page = 0, limit = 10):
-    start = limit * page
-    end = start + limit
-    return movies[start:end]
 
 def filtered_movies (movies,**filters):
     filtered_movies = []

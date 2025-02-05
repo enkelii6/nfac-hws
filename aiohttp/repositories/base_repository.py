@@ -16,14 +16,13 @@ class BaseRepository(ABC):
     @abstractmethod
     async def filter(self, **kwargs) -> [dict]: ...
 
-    """async def paginate(self, **kwargs, limit):
-        start = limit * page
+    async def paginate(self, items, page=0, limit=10) -> list:
+        start = page * limit
         end = start + limit
-        return movies[start:end]"""
+        return items[start:end]
 
-    async def sorted_movies(self) -> dict:
-        sorted_movies = sorted(kwargs.items(), key=lambda x: x['rating'], reverse=True)
-        return web.json_response({})
+    async def sort(self, key='rating', reverse=True) -> list:
+        return sorted(self.data, key=lambda x: float(x.get(key, 0)), reverse=reverse)
 
     async def _compare_kwargs(self, data: dict, **kwargs) -> bool:
         for key, value in kwargs.items():
