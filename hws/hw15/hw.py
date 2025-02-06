@@ -81,12 +81,12 @@ Create a class Person with attributes for name and age. Implement a method birth
 """
 
 
-class Person:
-    def __init__(self, name, age):
-        pass
-
-    def birthday(self):
-        pass
+# class Person:
+#     def __init__(self, name, age):
+#         pass
+#
+#     def birthday(self):
+#         pass
 
 
 """
@@ -151,9 +151,9 @@ Create a Student class and a Course class. Each Course can enroll students and p
 """
 
 
-class Student:
-    def __init__(self, name):
-        pass
+# class Student:
+#     def __init__(self, name):
+#         pass
 
 
 class Course:
@@ -383,7 +383,8 @@ Create a School class with a list of Teacher and Student objects. Teacher and St
 
 class Person:
     def __init__(self, name, age):
-        pass
+        self.name = name
+        self.age = age
 
 
 class Teacher(Person):
@@ -396,16 +397,17 @@ class Student(Person):
 
 class School:
     def __init__(self):
-        pass
+        self.students = []
+        self.teachers = []
 
     def add_teacher(self, teacher):
-        pass
+        self.teachers.append(teacher)
 
     def add_student(self, student):
-        pass
+        self.students.append(student)
 
     def print_all(self):
-        pass
+        return self.students + self.teachers
 
 
 """
