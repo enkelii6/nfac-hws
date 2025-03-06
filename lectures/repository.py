@@ -38,7 +38,7 @@ class CSVRepository(BaseRepository):
 
         return data_list
 
-    async def get(self, **kwargs) -> dict | None:
+    async def get(self, **kwargs):
         for row in self._get_all():
             if self._compare_kwargs(row, **kwargs):
                 return row
