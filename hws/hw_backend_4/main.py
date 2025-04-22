@@ -67,3 +67,34 @@ def search_books(
         "index.html",
         {"request": request, "books": books, "search_query": q}
     )
+
+@app.get("/books/{book_id}/edit")
+def edit_book_page(request: Request, book_id: int):
+    book = repo.get_one(book_id)
+    if not book:
+        return RedirectResponse("/books", status_code=303)
+    return templtates.TemplateResponse("edit.html", {"request": request, "book": book})
+
+@app.post("/books/{book_id}/edit")
+def edit_book(
+    request: Request,
+    book_id: int,
+    title: str = Form(),
+    author: str = Form(),
+    year: int = Form(),
+    price: int = Form(),
+    poster: str = Form()
+):
+    updated = repo.update(book_id, {
+        "title": title,
+        "author": author,
+        "year": year,
+        "price": price,
+        "poster": poster
+    })
+    return RedirectResponse(url="/books", status_code=303)
+
+@app.post("/books/{book_id}/delete")
+def delete_book(book_id: int):
+    repo.delete(book_id)
+    return RedirectResponse(url="/books", status_code=303)

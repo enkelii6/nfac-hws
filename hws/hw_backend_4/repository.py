@@ -84,3 +84,22 @@ class BooksRepository:
             if (query in book.title.lower() or
                 query in book.author.lower())
         ]
+
+    def update(self, book_id: int, updated_data: dict) -> bool:
+        for book in self.books:
+            if book.id == book_id:
+                book.title = updated_data.get('title', book.title)
+                book.author = updated_data.get('author', book.author)
+                book.year = updated_data.get('year', book.year)
+                book.price = updated_data.get('price', book.price)
+                book.poster = updated_data.get('poster', book.poster)
+                return True
+        return False
+
+    def delete(self, book_id: int) -> bool:
+        for book in self.books:
+            if book.id == book_id:
+                self.books.remove(book)
+                return True
+        return False
+

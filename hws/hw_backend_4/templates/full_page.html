@@ -419,6 +419,12 @@ nav a.active::after {
                 </div>
 
                 <button class="btn">Добавить в корзину</button>
+                <a href="/books/{{ book.id }}/edit" class="btn" style="background-color: #3498db;">Редактировать</a>
+
+                <form method="post" action="/books/{{ book.id }}/delete" style="display:inline;">
+                <button type="submit" class="btn" style="background-color: #6c757d;">Удалить</button>
+                </form>
+
             </div>
         </div>
     </div>
